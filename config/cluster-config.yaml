@@ -1,0 +1,27 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+    name: cluster-config
+    namespace: flux-system
+data:
+    test: ENC[AES256_GCM,data:Xi5MyMw=,iv:5WfWqBTKgH6v3425R1h9Doh6SJg4T+/l9i4+GNU+HyI=,tag:LjWNPF2w+I1OstJR141+xQ==,type:str]
+sops:
+    kms: []
+    gcp_kms: []
+    azure_kv: []
+    hc_vault: []
+    age:
+        - recipient: age1uprm5p9crdz7xn3ra9kfwv2axyg6re0jgn6tknf9tmsrn7dm2u3qktlpgx
+          enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSAwNU9WcDhOTFkrTHFoeEt1
+            VFdtV1kwRVNLbFVtNDFqQVVscG56SDdKdGlRCkJIL2ZPekIrK1Q2N2lQRzMwMFRY
+            MFNTUnUySWNlZDdweDNyc0haL3lrYzQKLS0tIGZRQW5kZEVHR3ZWN0JBZHFoMjJP
+            Mm5Helg4bDBqY3dhdFNnT1lYWXdYV2cKSsrqXV3PiP9KcWL+eblaZ1LxWSa3+Wjg
+            t8ZNqAWOyHosD83tmgqSCUkOMFecT4yIszF208pQMfSIdLV0xIJKHQ==
+            -----END AGE ENCRYPTED FILE-----
+    lastmodified: "2025-05-09T01:45:33Z"
+    mac: ENC[AES256_GCM,data:LPgHELX6GYQNEFORfsJ3OEyr7GSPNEi08mW44ubpn3iDtG9Qg+pxT2XNQf1zB86B2QYyWAY5ItldfeoXV5n89YvGKAWAX4cTdxsHorK/eoF2t9WHrxtHh14XOnH0xWHn1YtZQHPvGiOXylSz0jJqSfCVOlYD4R3bys78unG6uJU=,iv:125Py12/SQdGSew5RvSTOAO9GIW9EWnJhkzc8/TmFzM=,tag:3x8C9WHlTHrUXsDIetwqJg==,type:str]
+    pgp: []
+    encrypted_regex: ^(data|stringData)$
+    version: 3.9.4
