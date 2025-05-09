@@ -4,8 +4,12 @@ metadata:
   name: repos
   namespace: flux-system
 spec:
-  interval: 10m0s
-  path: ./repos
+  interval: 1h
+  retryInterval: 1m
+  timeout: 5m
   sourceRef:
     kind: GitRepository
     name: flux-system
+  path: ./repos
+  prune: true
+  wait: true
