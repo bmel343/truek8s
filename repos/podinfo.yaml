@@ -6,4 +6,4 @@ metadata:
 spec:
   type: "oci"
   interval: 2h
-  url: oci://ghcr.io/stefanprodan/chartst
+  url: oci://ghcr.io/stefanprodan/charts
