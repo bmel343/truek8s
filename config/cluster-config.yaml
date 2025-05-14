@@ -4,8 +4,8 @@ metadata:
     name: cluster-config
     namespace: flux-system
 data:
-    test: ENC[AES256_GCM,data:6fBI0A8=,iv:THg4A6X92kp8I1mea5vTnz6jiBIrOFa1zU3r80qWGPI=,tag:hcgrEMYhSqDz9Kn5EsIwew==,type:str]
-    METALLB_RANGE: ENC[AES256_GCM,data:xdCnr4+2nE4/v2Zs156ADsg9Q51e+Vbzl95z1KEOXQ==,iv:nz4Wb6KiSqG/7lFNe1A/MzxXbR2FJLk/7Kw7CMGiEQY=,tag:lW+KeBX7/d2DLDPDNCuxhQ==,type:str]
+    test: ENC[AES256_GCM,data:knw+3oE=,iv:bGbJZAJJMQw2l0a/E5DEdlH8U54vO/v5it9gCmDdkRk=,tag:2uxt98DLNfqGvK45FhL1DQ==,type:str]
+    METALLB_RANGE: ENC[AES256_GCM,data:jENwm4A+0Kynvdv+Pc0GR2xwVbkDVIfRhx0OhmTc9Q==,iv:RbXAP1FJNIx8L2Rw/dTOCRf41/1LDUofnGllsY8mimo=,tag:U7SEiCulQOVmTTc9vLr18w==,type:str]
 sops:
     kms: []
     gcp_kms: []
@@ -15,14 +15,14 @@ sops:
         - recipient: age1uprm5p9crdz7xn3ra9kfwv2axyg6re0jgn6tknf9tmsrn7dm2u3qktlpgx
           enc: |
             -----BEGIN AGE ENCRYPTED FILE-----
-            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBVMHdmdUlGaUxjWDJva2lo
-            THJRRGpzSzVpcE9vdDJlN1NucnhkWjV4RkJFCmNvdjNOQ0R6V01WN2l2SUJETGs3
-            S3lXbnBqYWlkOGFzeU94QjkyMmtka1kKLS0tIG11Q0s1YlNKYzFpRnQ0azFqeVZk
-            dVNTNlNiNENjUnEzTTlHVTQzUTR6QkUKT0GsLTs7k+Ti4jovWhOKZDxFXnXi19mr
-            2f0878F6aGPd1ku0CkxuCJ5I7cBuCdiV5s1J8/YtIGAqW1RbQNbrdg==
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBsbERka0VVN084UWVwV1VI
+            RE8rRU13cjNWOWZqZ2doaXRkekV4QWhEOHc4Cjlib0JkMWRGYzB1Y1hyZ0daR1pL
+            RDlCbllLR1hRZENsZEg2bUZmRG55OEUKLS0tIENOSUJVRkF3U2RlM0oxNVZyTFNY
+            QkxHMEQrZ3I2NWliYUJ0YUZzSXJDQ0kKX+gQnQNoJM+xoQ10hrg85HKSQory8wHV
+            /C4IrKvr/znbG34CP6bAZAQjJyqytZKjWg3vNkXFws3b9i871u1Y+g==
             -----END AGE ENCRYPTED FILE-----
-    lastmodified: "2025-05-14T02:32:31Z"
-    mac: ENC[AES256_GCM,data:AOKPMQ8zOgJM8EGCjsViIE/jsfXHEYaeQ9T1iRfhb2d4Z1mlZ1DgkB0xHSGJm5B/kYLYOjrefA37/zOAwV3ju1piSNmT1/Mf4xBtCcK3HEShTuOUGa9G94dW+O6QQLmAIesUj5jZpWoUQ1wOfTzqUYxgTS+0b5LZHi7m0KYnfbk=,iv:iuiGRfFdkZkP8t1eR1hKpIDIU1h2I6982+nSnOODBX8=,tag:U/1GUVSgB+8du/U1fAteDQ==,type:str]
+    lastmodified: "2025-05-14T23:31:57Z"
+    mac: ENC[AES256_GCM,data:I+mNGi2Bv8aHmkVRuR7+UeMxtiPbexsUWc5FtkbNL8ohg0GAiJ3X38IY5kO5x6wdR3KZPqdOogCGqabbh4THjQQl7RB9w9+H3Yspss4mYWL8+wCr84AeR2h+GmzY7MsrQeJV8XnZqIYyirDkNyCPrcwvCFXqP+GzUmy5rPUZJBs=,iv:zIHlgBh/cZfvNEPfiAWy5U7vTnfulU8aSntDmIwxzzA=,tag:7hJUZXGBfhialrhjZiEZKQ==,type:str]
     pgp: []
     encrypted_regex: ^(data|stringData)$
     version: 3.9.4
