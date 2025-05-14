@@ -4,3 +4,4 @@ resources:
   - truecharts.yaml
   - longhorn.yaml
   - podinfo.yaml
+  - metallb.yaml
