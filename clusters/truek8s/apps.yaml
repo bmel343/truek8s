@@ -10,7 +10,7 @@ spec:
   sourceRef:
     kind: GitRepository
     name: flux-system
-  path: ./apps/kustomizations
+  path: ./apps/production
   prune: true
   wait: true
   patches:
