@@ -60,9 +60,9 @@ spec:
         use-forwarded-headers: "true"
       metrics:
         enabled: true
-#      extraArgs:
-#        default-ssl-certificate: "clusterissuer/certificate-issuer-general-wildcard"
-#        publish-status-address: ${NGINX_INTERNAL_IP}
+      extraArgs:
+        default-ssl-certificate: "clusterissuer/certificate-issuer-star-domain-0"
+        publish-status-address: ${NGINX_IP}
       terminationGracePeriodSeconds: 120
       publishService:
         enabled: false
