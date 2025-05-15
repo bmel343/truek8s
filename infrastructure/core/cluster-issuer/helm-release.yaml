@@ -32,7 +32,7 @@ spec:
         name: "selfsigned"
       ## Remove these if you do NOT want to use clusterissuer
       ACME:
-        - name: letsencrypt-domain_0
+        - name: letsencrypt-domain-0
           # Used for both logging in to the DNS provider AND ACME registration
           email: "${CLOUDFLARE_EMAIL}"
           server: 'https://acme-v02.api.letsencrypt.org/directory'
@@ -48,7 +48,7 @@ spec:
       certificates:
         - name: star-domain-0
           enabled: true
-          certificateIssuer: letsencrypt_domain_0
+          certificateIssuer: letsencrypt-domain-0
           hosts:
             - ${DOMAIN_0}
             - '*.${DOMAIN_0}'
