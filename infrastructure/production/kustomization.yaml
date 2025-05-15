@@ -4,3 +4,4 @@ resources:
   - longhorn.yaml
   - metallb.yaml
   - metallb-config.yaml
+  - nginx-ingress.yaml

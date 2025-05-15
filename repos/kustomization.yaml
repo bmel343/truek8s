@@ -5,3 +5,4 @@ resources:
   - longhorn.yaml
   - podinfo.yaml
   - metallb.yaml
+  - ingress-nginx.yaml
