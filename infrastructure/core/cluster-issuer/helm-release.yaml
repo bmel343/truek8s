@@ -46,7 +46,7 @@ spec:
       # Accepts comma-separated regex expressions
       replicationNamespaces: '.*'
       certificates:
-        - name: star_domain_0
+        - name: star-domain-0
           enabled: true
           certificateIssuer: letsencrypt_domain_0
           hosts:
