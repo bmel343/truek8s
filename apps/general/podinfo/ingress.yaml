@@ -6,7 +6,7 @@ metadata:
 spec:
   ingressClassName: internal
   rules:
-  - host: podinfo.{DOMAIN_0}
+  - host: podinfo.${DOMAIN_0}
     http:
       paths:
       - backend:
