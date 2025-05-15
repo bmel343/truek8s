@@ -5,3 +5,5 @@ resources:
   - metallb.yaml
   - metallb-config.yaml
   - ingress-nginx.yaml
+  - cert-manager.yaml
+  - cluster-issuer.yaml
