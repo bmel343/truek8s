@@ -21,6 +21,7 @@ spec:
         value: ${test}
     ingress:
       main:
+        enabled: true
         ingressClassName: internal
         hosts:
           - host: podinfo.${DOMAIN_0}
