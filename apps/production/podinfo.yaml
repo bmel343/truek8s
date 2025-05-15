@@ -4,6 +4,8 @@ metadata:
   name: podinfo
   namespace: flux-system
 spec:
+  dependsOn:
+    - name: ingress-nginx
   interval: 10m
   path: apps/general/podinfo
   prune: true

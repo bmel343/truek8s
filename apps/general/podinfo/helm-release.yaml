@@ -19,9 +19,3 @@ spec:
     extraEnvs:
       - name: MULTIPLE_VALUES
         value: ${test}
-    ingress:
-      main:
-        enabled: true
-        ingressClassName: internal
-        hosts:
-          - host: podinfo.${DOMAIN_0}
