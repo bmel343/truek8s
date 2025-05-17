@@ -5,7 +5,7 @@ metadata:
   namespace: flux-system
 spec:
   dependsOn:
-    - name: snapshot-contoller
+    - name: snapshot-controller
   interval: 10m
   path: infrastructure/core/volsync
   prune: true
