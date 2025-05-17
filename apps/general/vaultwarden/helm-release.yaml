@@ -35,32 +35,6 @@ spec:
             accessKey: "${S3_ACCESS_KEY}"
             secretKey: "${S3_SECRET_KEY}"
             encrKey: "${S3_ENCRYPTION_KEY}"
-        ingress:
-            main:
-                enabled: true
-                integrations:
-                    certManager:
-                        enabled: true
-                        certificateIssuer: letsencrypt-domain-0
-                hosts:
-                    - host: vaultwarden-test.${DOMAIN_0}
-                      paths:
-                        - path: /
-                          pathType: Prefix
-            admin:
-                enabled: true
-                primary: false
-                targetSelector:
-                    main: main
-                integrations:
-                    certManager:
-                        enabled: true
-                        certificateIssuer: letsencrypt_domain_0
-                hosts:
-                    - host: vaultwarden-test.${DOMAIN_0}
-                      paths:
-                        - path: /admin
-                          pathType: Prefix
         persistence:
             data:
               volsync:
