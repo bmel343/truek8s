@@ -7,3 +7,4 @@ resources:
   - metallb.yaml
   - ingress-nginx.yaml
   - jetstack.yaml
+  - cloudnative-pg.yaml
