@@ -1,0 +1,108 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+    name: vaultwarden
+    namespace: vaultwarden
+spec:
+    interval: 10m
+    chart:
+        spec:
+            chart: vaultwarden
+            sourceRef:
+                kind: HelmRepository
+                name: truecharts
+                namespace: flux-system
+            interval: 10m
+    install:
+        createNamespace: true
+        crds: CreateReplace
+        timeout: 20m
+        remediation:
+            retries: 2
+    upgrade:
+        crds: CreateReplace
+        timeout: 20m
+        remediation:
+            retries: 2
+    values:
+        global:
+            stopAll: false
+        credentials:
+          backblaze:
+            type: s3
+            url: "${S3_URL}"
+            bucket: "${S3_BUCKET}-truek8s-vaultwarden"
+            accessKey: "${S3_ACCESS_KEY}"
+            secretKey: "${S3_SECRET_KEY}"
+            encrKey: "${S3_ENCRYPTION_KEY}"
+        ingress:
+            main:
+                enabled: true
+                integrations:
+                    certManager:
+                        enabled: true
+                        certificateIssuer: letsencrypt-domain-0
+                hosts:
+                    - host: vaultwarden-test.${DOMAIN_0}
+                      paths:
+                        - path: /
+                          pathType: Prefix
+            admin:
+                enabled: true
+                primary: false
+                targetSelector:
+                    main: main
+                integrations:
+                    certManager:
+                        enabled: true
+                        certificateIssuer: letsencrypt_domain_0
+                hosts:
+                    - host: vaultwarden-test.${DOMAIN_0}
+                      paths:
+                        - path: /admin
+                          pathType: Prefix
+        persistence:
+            data:
+              volsync:
+              - name: data
+                type: restic
+                cleanupTempPVC: false
+                cleanupCachePVC: false
+                credentials: backblaze
+                dest:
+                  enabled: true
+                src:
+                  enabled: true
+                  trigger:
+                    schedule: 40 1 * * *
+        cnpg:
+            main:
+              cluster:
+                singleNode: true
+              mode: recovery
+              backups:
+                enabled: true
+                revision: "1"
+                credentials: backblaze
+                scheduledBackups:
+                  - name: daily-backup
+                    schedule: "0 5 0 * * *"
+                    backupOwnerReference: self
+                    immediate: true
+                    suspend: false
+              recovery:
+                method: object_store
+#                revision: "1"
+                credentials: backblaze
+        vaultwarden:
+            admin:
+                enabled: true
+                token: ${VW_ADMIN_TOKEN}
+        workload:
+            main:
+                podSpec:
+                    containers:
+                        main:
+                            advanced: false
+                            env:
+                                EXPERIMENTAL_CLIENT_FEATURE_FLAGS: autofill-overlay,autofill-v2
