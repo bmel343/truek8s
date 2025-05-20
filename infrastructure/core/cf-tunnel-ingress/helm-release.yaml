@@ -1,0 +1,24 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: cloudflare-tunnel-ingress
+  namespace: cloudflare-ingress
+spec:
+  chart:
+    spec:
+      chart: cloudflare-tunnel-ingress-controller
+      reconcileStrategy: ChartVersion
+      sourceRef:
+        kind: HelmRepository
+        name: strrl
+        namespace: flux-system
+  values:
+    cloudflare:
+      accountId: ${CF_INGRESS_ACCOUNT_ID}
+      apiToken: ${CF_INGRESS_API_TOKEN}
+      tunnelName: ${CF_INGRESS_TUNNEL}
+    ingressClass:
+      name: cloudflare
+      controllerValue: strrl.dev/cloudflare-tunnel-ingress-controller
+      isDefaultClass: false
+  interval: 1m0s
