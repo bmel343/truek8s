@@ -11,4 +11,4 @@ resources:
   - cloudnative-pg.yaml
   - kubernetes-reflector.yaml
   - volsync.yaml
-  - cf-tunnel-ingress
+  - cf-tunnel-ingress.yaml
