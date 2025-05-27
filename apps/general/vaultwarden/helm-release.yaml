@@ -31,7 +31,7 @@ spec:
           backblaze:
             type: s3
             url: "${S3_URL}"
-            bucket: "${S3_BUCKET}-truek8s-vaultwarden"
+            bucket: "${S3_BUCKET}-vaultwarden"
             accessKey: "${S3_ACCESS_KEY}"
             secretKey: "${S3_SECRET_KEY}"
             encrKey: "${S3_ENCRYPTION_KEY}"
@@ -46,7 +46,7 @@ spec:
                 enabled: true
                 certificateIssuer: letsencrypt-domain-0
             hosts:
-              - host: vaultwarden-test.${DOMAIN_0}
+              - host: vault.${DOMAIN_0}
                 paths:
                   - path: /
                     pathType: Prefix 
@@ -71,7 +71,7 @@ spec:
               mode: recovery
               backups:
                 enabled: true
-                revision: "2"
+                revision: "3"
                 credentials: backblaze
                 scheduledBackups:
                   - name: daily-backup
@@ -81,12 +81,20 @@ spec:
                     suspend: false
               recovery:
                 method: object_store
-                revision: "1"
+                revision: "4"
                 credentials: backblaze
         vaultwarden:
             admin:
                 enabled: true
                 token: ${VW_ADMIN_TOKEN}
+            smtp:
+                enabled: true
+                host: ${SMTP_HOST}
+                from: ${SMTP_FROM}
+                port: ${SMTP_PORT}
+                security: ${SMTP_SECURITY}
+                user: ${SMTP_USER}
+                password: ${SMTP_PASS}
         workload:
             main:
                 podSpec:
