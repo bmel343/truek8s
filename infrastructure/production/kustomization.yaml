@@ -12,3 +12,4 @@ resources:
   - kubernetes-reflector.yaml
   - volsync.yaml
   - cf-tunnel-ingress.yaml
+  - media-config.yaml
