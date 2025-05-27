@@ -81,7 +81,7 @@ spec:
                     suspend: false
               recovery:
                 method: object_store
-                revision: "3"
+                revision: "2"
                 credentials: backblaze
         vaultwarden:
             admin:
