@@ -1,0 +1,140 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+    name: qbittorrent
+    namespace: media
+spec:
+    postRenderers:
+    - kustomize:
+        patches:
+          - target:
+              version: v1
+              kind: Deployment
+              name: qbittorrent
+            patch: |
+              - op: add
+                path: /spec/template/spec/containers/1/resources/limits/truecharts.org~1tun
+                value: 1
+    interval: 5m
+    chart:
+        spec:
+            # renovate: registryUrl=https://charts.truechartsoci.org
+            chart: qbittorrent
+#            version: 22.1.8
+            sourceRef:
+                kind: HelmRepository
+                name: truecharts
+                namespace: flux-system
+            interval: 5m
+    install:
+        createNamespace: true
+        crds: CreateReplace
+        remediation:
+            retries: 3
+    upgrade:
+        crds: CreateReplace
+        remediation:
+            retries: 3
+    values:
+      portal:
+        open:
+          enabled: false
+      global:
+        stopAll: false
+      credentials:
+        backblaze:
+          type: s3
+          url: "${S3_URL}"
+          bucket: "${S3_BUCKET}-qbit"
+          accessKey: "${S3_ACCESS_KEY}"
+          secretKey: "${S3_SECRET_KEY}"
+          encrKey: "${S3_ENCRYPTION_KEY}"
+      ingress:
+        main:
+          enabled: true
+          integrations:
+            traefik:
+              enabled: true
+              entrypoints:
+              - websecure
+              middlewares:
+              - name: auth
+                namespace: 'traefik'
+#              - name: torrent
+#                namespace: 'traefik'
+            certManager:
+              enabled: true
+              certificateIssuer: letsencrypt
+          hosts:
+            - host: qbit.${DOMAIN_0}
+              paths:
+                - path: /
+                  pathType: Prefix
+        cloudflare:
+          enabled: true
+          ingressClassName: cloudflare-tunnel
+          rules:
+            - http:
+              paths:
+              - path: /
+                pathType: Prefix
+          backend:
+            service:
+              name: qbittorrent
+              port:
+                number: 10095
+          hosts:
+            - host: qbit.${DOMAIN_0}
+              paths:
+                - path: /
+                  pathType: Prefix
+      persistence:
+        config:
+          volsync:
+          - name: config
+            type: restic
+            cleanupTempPVC: true
+            cleanupCachePVC: true
+            credentials: backblaze
+            dest:
+              enabled: true
+            src:
+              enabled: true
+              trigger:
+                schedule: 40 0 * * *
+        media:
+          enabled: true
+          existingClaim: media-nfs-pvc
+          mountPath: /Media
+      workload:
+        qbitportforward:
+          enabled: false
+#      service:
+#        proxy:
+#          enabled: true
+#          ports:
+#            gluetun:
+#              enabled: true
+#              port: 8888
+#              protocol: "http"
+#              targetPort: 8888
+      addons:
+        vpn:
+          type: gluetun
+          killSwitch: true
+          excludedNetworks_IPv4:
+          - 192.168.0.0/24
+          - 192.168.101.0/24
+          - 192.168.102.0/24
+          - 192.168.103.0/24
+          env:
+            VPN_SERVICE_PROVIDER: ${VPN_SERVICE_PROVIDER}
+            VPN_TYPE: "wireguard"
+            WIREGUARD_ADDRESSES: ${WIREGUARD_ADDRESSES}
+            WIREGUARD_PRIVATE_KEY: ${WIREGUARD_PRIVATE_KEY}
+            FIREWALL_VPN_INPUT_PORTS: ${FIREWALL_VPN_INPUT_PORTS}
+            FIREWALL_OUTBOUND_SUBNETS: ${FIREWALL_OUTBOUND_SUBNETS}
+            WIREGUARD_PRESHARED_KEY: ${WIREGUARD_PRESHARED_KEY}
+            WIREGUARD_PUBLIC_KEY: ${WIREGUARD_PUBLIC_KEY}
+            WIREGUARD_MTU: "1320"
+            SERVER_COUNTRIES: ${SERVER_COUNTRIES}

@@ -1,0 +1,117 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: authentik
+  namespace: authentik
+spec:
+  interval: 15m
+  chart:
+    spec:
+      chart: authentik
+      sourceRef:
+        kind: HelmRepository
+        name: truecharts
+        namespace: flux-system
+      interval: 15m
+  timeout: 20m
+  maxHistory: 3
+  install:
+    createNamespace: true
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  uninstall:
+    keepHistory: false
+  values:
+    credentials:
+       backblaze:
+         type: s3
+         url: "${S3_URL}"
+         bucket: "${S3_BUCKET}-authentik"
+         accessKey: "${S3_ACCESS_KEY}"
+         secretKey: "${S3_SECRET_KEY}"
+         encrKey: "${S3_ENCRYPTION_KEY}"
+    ingress:
+        main:
+          enabled: true
+          hosts:
+            - host: sso.${DOMAIN_0}
+            - host: "*.bmel.me"
+              paths:
+                - path: /outpost.goauthentik.io
+                  pathType: Prefix
+          integrations:
+            traefik:
+              enabled: true
+            certManager:
+              enabled: true
+              certificateIssuer: letsencrypt
+    cnpg:
+      main:
+        cluster:
+          singleNode: true
+#        mode: recovery
+        backups:
+          enabled: true
+          revision: "5"
+          credentials: backblaze
+          scheduledBackups:
+            - name: daily-backup
+              schedule: "0 5 0 * * *"
+              backupOwnerReference: self
+              immediate: true
+              suspend: false
+        recovery:
+          method: object_store
+#          revision: "1"
+          credentials: backblaze
+    persistence:
+      media:
+        accessModes: 
+          - ReadWriteMany
+        volsync:
+          - name: media
+            type: restic
+            cleanupTempPVC: false
+            cleanupCachePVC: false
+            credentials: backblaze
+            dest:
+              enabled: true
+            src:
+              enabled: true
+              trigger:
+                schedule: 10 0 * * *
+      templates:
+        accessModes: 
+          - ReadWriteMany
+        volsync:
+          - name: templates
+            type: restic
+            cleanupTempPVC: false
+            cleanupCachePVC: false
+            credentials: backblaze
+            dest:
+              enabled: true
+            src:
+              enabled: true
+              trigger:
+                schedule: 10 0 * * *
+    authentik:
+      credentials:
+        # Only works on initial install
+        email: ${SMTP_FROM}
+        password: ${LLDAP_LDAP_USER_PASS}
+        # Optional, only set if you want to use it
+      email:
+        host: ${SMTP_HOST}
+        port: ${SMTP_PORT}
+        username: ${SMTP_USER}
+        password: ${SMTP_PASS}
+        useTLS: true
+        useSSL: false
+        timeout: 10
+        from: ${SMTP_FROM}

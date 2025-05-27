@@ -1,0 +1,127 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+    name: immich
+    namespace: immich
+spec:
+    interval: 5m
+    chart:
+        spec:
+            # renovate: registryUrl=https://charts.truechartsoci.org
+            chart: immich
+            version: 17.55.4
+            sourceRef:
+                kind: HelmRepository
+                name: truecharts
+                namespace: flux-system
+            interval: 5m
+    install:
+        createNamespace: true
+        crds: CreateReplace
+        remediation:
+            retries: 1
+    upgrade:
+        crds: CreateReplace
+        remediation:
+            retries: 1
+    timeout: 30m
+    values:
+      global:
+        stopAll: false
+      credentials:
+        backblaze:
+          type: s3
+          url: "${S3_URL}"
+          bucket: "${S3_BUCKET}-immich"
+          accessKey: "${S3_ACCESS_KEY}"
+          secretKey: "${S3_SECRET_KEY}"
+          encrKey: "${S3_ENCRYPTION_KEY}"
+      ingress:
+        main:
+          enabled: true
+          integrations:
+            traefik:
+              enabled: true
+              entrypoints:
+              - websecure
+            certManager:
+              enabled: true
+              certificateIssuer: letsecnrypt
+          hosts:
+            - host: photos.${DOMAIN_0}
+              paths:
+                - path: /
+                  pathType: Prefix
+        cloudflare:
+          enabled: true
+          ingressClassName: cloudflare-tunnel
+          hosts:
+          - host: photos.${DOMAIN_0}
+            paths:
+            - path: /
+              pathType: Prefix
+      cnpg:
+        main:
+          cluster:
+            singleNode: true
+          pgVersion: 15
+#          mode: recovery
+          backups:
+            enabled: true
+            revision: "1"
+            credentials: backblaze
+            scheduledBackups:
+              - name: daily-backup
+                schedule: "0 0 0 * * *"
+                backupOwnerReference: self
+                immediate: true
+                suspend: false
+          recovery:
+            method: object_store
+#            revision: "1"
+            credentials: backblaze
+      immich:
+        enable_ml: true
+        mlImageType: mlImage
+        log_level: log
+      persistence:
+        library:
+          enabled: true
+          type: nfs
+          path: ${IMMICH_NFS_PATH}/library
+          server: ${IMMICH_NFS_IP}
+        uploads:
+          enabled: true
+          type: nfs
+          path: ${IMMICH_NFS_PATH}/uploads
+          server: ${IMMICH_NFS_IP}
+        backups:
+          enabled: true
+          type: nfs
+          path: ${IMMICH_NFS_PATH}/backups
+          server: ${IMMICH_NFS_IP}
+        thumbs:
+          enabled: true
+          type: nfs
+          path: ${IMMICH_NFS_PATH}/thumbs
+          server: ${IMMICH_NFS_IP}
+        profile:
+          accessModes: 
+            - ReadWriteMany
+          volsync:
+          - name: config
+            type: restic
+            cleanupTempPVC: false
+            cleanupCachePVC: false
+            credentials: backblaze
+            dest:
+              enabled: true
+            src:
+              enabled: true
+              trigger:
+                schedule: 10 1 * * *
+        video:
+          enabled: true
+          type: nfs
+          path: ${IMMICH_NFS_PATH}/video
+          server: ${IMMICH_NFS_IP}

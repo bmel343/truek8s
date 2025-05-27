@@ -1,0 +1,36 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+    name: tubesync-nfs-pv
+    namespace: media
+spec:
+    storageClassName: tubesync-nfs
+    capacity:
+        storage: 1Mi
+    accessModes:
+        - ReadWriteMany
+    persistentVolumeReclaimPolicy: Retain
+    nfs:
+        server: ${NFS_MEDIA_SERVER}
+        path: /mnt/Pool1/media/Youtube
+    mountOptions:
+        - nfsvers=4
+        - tcp
+        - intr
+        - hard
+        - noatime
+        - nodiratime
+        - nolock
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+    name: tubesync-nfs-pvc
+    namespace: media
+spec:
+    storageClassName: tubesync-nfs
+    accessModes:
+        - ReadWriteMany
+    resources:
+        requests:
+            storage: 1Mi
