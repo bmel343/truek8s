@@ -42,35 +42,13 @@ spec:
       ingress:
         main:
           enabled: true
+          ingressClassName: internal
           integrations:
             traefik:
-              enabled: true
-              entrypoints:
-              - websecure
-#              middlewares:
-#              - name: real-ip
-#                namespace: traefik
+              enabled: false
             certManager:
               enabled: true
-              certificateIssuer: letsencrypt
-          hosts:
-            - host: stream.${DOMAIN_0}
-              paths:
-                - path: /
-                  pathType: Prefix
-        cloudflare:
-          enabled: true
-          ingressClassName: cloudflare-tunnel
-          rules:
-            - http:
-              paths:
-              - path: /
-                pathType: Prefix
-          backend:
-            service:
-              name: jellyfin
-              port:
-                number: 8096
+              certificateIssuer: letsencrypt-domain-0
           hosts:
             - host: stream.${DOMAIN_0}
               paths:

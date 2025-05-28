@@ -52,37 +52,13 @@ spec:
       ingress:
         main:
           enabled: true
+          ingressClassName: internal
           integrations:
             traefik:
-              enabled: true
-              entrypoints:
-              - websecure
-              middlewares:
-              - name: auth
-                namespace: 'traefik'
-#              - name: torrent
-#                namespace: 'traefik'
+              enabled: false
             certManager:
               enabled: true
-              certificateIssuer: letsencrypt
-          hosts:
-            - host: qbit.${DOMAIN_0}
-              paths:
-                - path: /
-                  pathType: Prefix
-        cloudflare:
-          enabled: true
-          ingressClassName: cloudflare-tunnel
-          rules:
-            - http:
-              paths:
-              - path: /
-                pathType: Prefix
-          backend:
-            service:
-              name: qbittorrent
-              port:
-                number: 10095
+              certificateIssuer: letsencrypt-domain-0
           hosts:
             - host: qbit.${DOMAIN_0}
               paths:
@@ -123,10 +99,10 @@ spec:
           type: gluetun
           killSwitch: true
           excludedNetworks_IPv4:
-          - 192.168.0.0/24
-          - 192.168.101.0/24
-          - 192.168.102.0/24
-          - 192.168.103.0/24
+          - ${LOCAL_NET_0}
+          - ${LOCAL_NET_1}
+          - ${LOCAL_NET_2}
+          - ${LOCAL_NET_3}
           env:
             VPN_SERVICE_PROVIDER: ${VPN_SERVICE_PROVIDER}
             VPN_TYPE: "wireguard"

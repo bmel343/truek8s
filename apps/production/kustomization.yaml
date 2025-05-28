@@ -3,3 +3,8 @@ kind: Kustomization
 resources:
 # - podinfo.yaml
   - vaultwarden.yaml
+  - jellyfin.yaml
+  - prowlarr.yaml
+  - radarr.yaml
+  - sonarr.yaml
+  - tubesync.yaml

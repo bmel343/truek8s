@@ -12,7 +12,7 @@ spec:
     persistentVolumeReclaimPolicy: Retain
     nfs:
         server: ${NFS_MEDIA_SERVER}
-        path: /mnt/Pool1/media/Youtube
+        path: ${NFS_TUBESYNC_PATH}
     mountOptions:
         - nfsvers=4
         - tcp

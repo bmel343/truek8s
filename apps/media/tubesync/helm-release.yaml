@@ -35,32 +35,13 @@ spec:
       ingress:
         main:
           enabled: true
+          ingressClassName: internal
           integrations:
             traefik:
-              enabled: true
-              entrypoints:
-              - websecure
+              enabled: false
             certManager:
               enabled: true
-              certificateIssuer: letsencrypt
-          hosts:
-            - host: tubesync.${DOMAIN_0}
-              paths:
-                - path: /
-                  pathType: Prefix
-        cloudflare:
-          enabled: false
-          ingressClassName: cloudflare-tunnel
-          rules:
-            - http:
-              paths:
-              - path: /
-                pathType: Prefix
-          backend:
-            service:
-              name: calibre
-              port:
-                number: 4848
+              certificateIssuer: letsencrypt-domain-0
           hosts:
             - host: tubesync.${DOMAIN_0}
               paths:
