@@ -5,7 +5,7 @@ metadata:
   namespace: flux-system
 spec:
   interval: 10m
-  path: truek8s/apps/media/radarr
+  path: apps/media/radarr
   prune: true
   sourceRef:
     kind: GitRepository

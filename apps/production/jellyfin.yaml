@@ -5,7 +5,7 @@ metadata:
   namespace: flux-system
 spec:
   interval: 10m
-  path: truek8s/apps/media/jellyfin
+  path: apps/media/jellyfin
   prune: true
   sourceRef:
     kind: GitRepository
