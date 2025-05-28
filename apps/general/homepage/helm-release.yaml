@@ -7,9 +7,7 @@ spec:
     interval: 5m
     chart:
         spec:
-            # renovate: registryUrl=https://charts.truechartsoci.org
             chart: homepage
-            version: 10.1.1
             sourceRef:
                 kind: HelmRepository
                 name: truecharts
@@ -31,7 +29,6 @@ spec:
             containers:
               main:
                 env:
-                  # Set this to your host (example: home.mydomain.com)
                   HOMEPAGE_ALLOWED_HOSTS: home.${DOMAIN_0}
       global:
         stopAll: false
@@ -46,14 +43,10 @@ spec:
       ingress:
         main:
           enabled: true
+          ingressClassName: internal
           integrations:
             traefik:
-              enabled: true
-              entrypoints:
-              - websecure
-#              middlewares:
-#              - name: auth
-#                namespace: traefik
+              enabled: false
             certManager:
               enabled: true
               certificateIssuer: letsencrypt-domain-0
@@ -62,24 +55,23 @@ spec:
               paths:
                 - path: /
                   pathType: Prefix
-      addons:
-        codeserver:
-          enabled: true
-          ingress:
-            enabled: true
-            hosts:
-            - host: homepage.code.${DOMAIN_0}
-              paths:
-              - path: /
-                pathType: Prefix
-            integrations:
-              certManager:
-                certificateIssuer: letsencrypt-domain-0
-                enabled: true
-              traefik:
-                enabled: true
-                entrypoints:
-                - websecure
+#        codeserver:
+#          enabled: true
+#          ingress:
+#            enabled: true
+#            hosts:
+#            - host: home.code.${DOMAIN_0}
+#              paths:
+#              - path: /
+#                pathType: Prefix
+#            integrations:
+#              certManager:
+#                certificateIssuer: letsencrypt-domain-0
+#                enabled: true
+#              traefik:
+#                enabled: true
+#                entrypoints:
+#                - websecure
 #                middlewares:
 #                - name: auth
 #                  namespace: 'traefik'

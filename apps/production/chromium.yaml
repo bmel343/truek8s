@@ -5,7 +5,7 @@ metadata:
   namespace: flux-system
 spec:
   interval: 10m
-  path: clusters/tk8s/kubernetes/general/chromium/app
+  path: apps/general/chromium
   prune: true
   sourceRef:
     kind: GitRepository

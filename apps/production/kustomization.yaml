@@ -12,3 +12,7 @@ resources:
   - lldap.yaml
   - authentik.yaml
   - qbittorrent.yaml
+  - homepage.yaml
+  - code-server.yaml
+  - chromium.yaml
+  - immich.yaml

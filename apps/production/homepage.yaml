@@ -5,7 +5,7 @@ metadata:
   namespace: flux-system
 spec:
   interval: 10m
-  path: clusters/tk8s/kubernetes/general/homepage/app
+  path: apps/general/homepage
   prune: true
   sourceRef:
     kind: GitRepository
