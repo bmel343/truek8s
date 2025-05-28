@@ -1,11 +1,11 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: lldap
+  name: generic-device-plugin
   namespace: flux-system
 spec:
   interval: 10m
-  path: apps/auth/lldap
+  path: infrastructure/core/generic-device-plugin
   prune: true
   sourceRef:
     kind: GitRepository

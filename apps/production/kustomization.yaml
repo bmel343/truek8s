@@ -11,3 +11,4 @@ resources:
   - kubernetes-dashboard.yaml
   - lldap.yaml
   - authentik.yaml
+  - qbittorrent.yaml

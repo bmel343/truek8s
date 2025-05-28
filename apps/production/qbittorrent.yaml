@@ -4,6 +4,8 @@ metadata:
   name: qbittorrent
   namespace: flux-system
 spec:
+  dependsOn:
+  - name: generic-device-plugin
   interval: 10m
   path: apps/media/qbittorrent
   prune: true
