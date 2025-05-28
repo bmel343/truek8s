@@ -4,9 +4,9 @@ metadata:
   name: authentik-cloudflare
   namespace: authentik
 spec:
-  ingressClassName: cloudflare-tunnel
+  ingressClassName: cloudflare
   rules:
-    - host: sso.bmel.me
+    - host: sso.${DOMAIN_0}
       http:
         paths:
           - backend:
