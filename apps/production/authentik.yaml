@@ -5,7 +5,7 @@ metadata:
   namespace: flux-system
 spec:
   interval: 10m
-  path: truek8s/apps/auth/authentik
+  path: apps/auth/authentik
   prune: true
   sourceRef:
     kind: GitRepository
