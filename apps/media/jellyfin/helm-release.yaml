@@ -59,8 +59,8 @@ spec:
           volsync:
           - name: config
             type: restic
-            cleanupTempPVC: true
-            cleanupCachePVC: true
+            cleanupTempPVC: false
+            cleanupCachePVC: false
             credentials: backblaze
             dest:
               enabled: true

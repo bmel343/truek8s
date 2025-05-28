@@ -80,8 +80,8 @@ spec:
         config:
           volsync:
           - name: config
-            cleanupTempPVC: true
-            cleanupCachePVC: true
+            cleanupTempPVC: false
+            cleanupCachePVC: false
             type: restic
             credentials: backblaze
             dest:
