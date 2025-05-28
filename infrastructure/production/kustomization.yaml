@@ -13,4 +13,4 @@ resources:
   - volsync.yaml
   - cf-tunnel-ingress.yaml
   - media-config.yaml
-  - generic-device-plugin
+  - generic-device-plugin.yaml
