@@ -9,3 +9,5 @@ resources:
   - sonarr.yaml
   - tubesync.yaml
   - kubernetes-dashboard.yaml
+  - lldap.yaml
+  - authentik.yaml
