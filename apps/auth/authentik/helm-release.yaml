@@ -49,7 +49,7 @@ spec:
           - host: sso.${DOMAIN_0}
           - host: "*.bmel.me"
             paths:
-              - path: /outpost.goauthentik.io
+              - path: /
                 pathType: Prefix
     cnpg:
       main:
