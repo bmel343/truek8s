@@ -47,28 +47,6 @@ spec:
             certificateIssuer: letsencrypt-domain-0
         hosts:
           - host: sso.${DOMAIN_0}
-          - host: "*.bmel.me"
-            paths:
-              - path: /
-                pathType: Prefix
-      cloudflare:
-        enabled: true
-        ingressClassName: cloudflare
-        integrations:
-          traefik:
-            enabled: false
-        rules:
-          - http:
-            paths:
-            - path: /
-              pathType: Prefix
-        backend:
-          service:
-            name: chromium
-            port:
-              number: 8080
-        hosts:
-          - host: chrome.${DOMAIN_0}
             paths:
               - path: /
                 pathType: Prefix
