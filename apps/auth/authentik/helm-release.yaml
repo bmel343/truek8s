@@ -51,7 +51,7 @@ spec:
               - path: /
                 pathType: Prefix
                 overrideService:
-                  name: authentik-http
+                  name: http
                   port: 10230
     cnpg:
       main:
