@@ -45,6 +45,11 @@ spec:
           certManager:
             enabled: true
             certificateIssuer: letsencrypt-domain-0
+        backend:
+          service:
+            name: authentik-http
+            port:
+              number: 10230
         hosts:
           - host: sso.${DOMAIN_0}
             paths:
