@@ -1,8 +1,8 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: authentik-cloudflare
-  namespace: authentik
+  name: immich-cloudflare
+  namespace: immich
 spec:
   ingressClassName: cloudflare
   rules:
