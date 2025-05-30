@@ -39,14 +39,13 @@ spec:
       ingress:
         main:
           enabled: true
+          ingressClassName: internal
           integrations:
             traefik:
-              enabled: true
-              entrypoints:
-              - websecure
+              enabled: false
             certManager:
               enabled: true
-              certificateIssuer: letsecnrypt
+              certificateIssuer: letsencrypt-domain-0
           hosts:
             - host: cloud.${DOMAIN_0}
               paths:
@@ -73,7 +72,7 @@ spec:
           mode: recovery
           backups:
             enabled: true
-            revision: "2"
+            revision: "3"
             credentials: backblaze
             scheduledBackups:
               - name: daily-backup
@@ -83,7 +82,7 @@ spec:
                 suspend: false
           recovery:
             method: object_store
-            revision: "1"
+            revision: "2"
             credentials: backblaze
       persistence:
         config:

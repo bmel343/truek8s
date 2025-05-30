@@ -16,3 +16,4 @@ resources:
   - code-server.yaml
   - chromium.yaml
   - immich.yaml
+  - nextcloud.yaml
