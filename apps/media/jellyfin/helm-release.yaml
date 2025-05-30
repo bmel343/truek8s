@@ -54,6 +54,17 @@ spec:
               paths:
                 - path: /
                   pathType: Prefix
+        cloudflare:
+          enabled: true
+          ingressClassName: cloudflare-tunnel
+          integrations:
+            traefik:
+              enabled: false
+          hosts:
+          - host: stream.${DOMAIN_0}
+            paths:
+            - path: /
+              pathType: Prefix
       persistence:
         config:
           volsync:
