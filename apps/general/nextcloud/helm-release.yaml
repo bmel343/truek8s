@@ -54,6 +54,9 @@ spec:
         cloudflare:
           enabled: true
           ingressClassName: cloudflare-tunnel
+          integrations:
+            traefik:
+              enabled: false
           hosts:
           - host: cloud.${DOMAIN_0}
             paths:
