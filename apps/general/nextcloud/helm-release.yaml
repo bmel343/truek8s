@@ -53,7 +53,7 @@ spec:
                   pathType: Prefix
         cloudflare:
           enabled: true
-          ingressClassName: cloudflare-tunnel
+          ingressClassName: cloudflare
           integrations:
             traefik:
               enabled: false
