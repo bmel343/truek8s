@@ -55,26 +55,21 @@ spec:
               paths:
                 - path: /
                   pathType: Prefix
-#        codeserver:
-#          enabled: true
-#          ingress:
-#            enabled: true
-#            hosts:
-#            - host: home.code.${DOMAIN_0}
-#              paths:
-#              - path: /
-#                pathType: Prefix
-#            integrations:
-#              certManager:
-#                certificateIssuer: letsencrypt-domain-0
-#                enabled: true
-#              traefik:
-#                enabled: true
-#                entrypoints:
-#                - websecure
-#                middlewares:
-#                - name: auth
-#                  namespace: 'traefik'
+        codeserver:
+          enabled: true
+          ingress:
+            enabled: true
+            hosts:
+            - host: home.code.${DOMAIN_0}
+              paths:
+              - path: /
+                pathType: Prefix
+            integrations:
+              certManager:
+                certificateIssuer: letsencrypt-domain-0
+                enabled: true
+              traefik:
+                enabled: false
       persistence:
         config:
           volsync:
