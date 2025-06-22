@@ -59,6 +59,7 @@ spec:
           enabled: true
           ingress:
             enabled: true
+            ingressClassName: internal
             hosts:
             - host: home.code.${DOMAIN_0}
               paths:
