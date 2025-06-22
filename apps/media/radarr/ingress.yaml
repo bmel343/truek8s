@@ -11,7 +11,7 @@ spec:
         paths:
           - backend:
               service:
-                name: radarr-cloudflare
+                name: radarr
                 port:
                   number: 7878
             path: /
