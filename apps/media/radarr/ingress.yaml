@@ -1,0 +1,18 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: radarr-cloudflare
+  namespace: media
+spec:
+  ingressClassName: cloudflare
+  rules:
+    - host: radarr.${DOMAIN_0}
+      http:
+        paths:
+          - backend:
+              service:
+                name: radarr-cloudflare
+                port:
+                  number: 7878
+            path: /
+            pathType: Prefix

@@ -1,0 +1,18 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: prowlarr-cloudflare
+  namespace: media
+spec:
+  ingressClassName: cloudflare
+  rules:
+    - host: prowlarr.${DOMAIN_0}
+      http:
+        paths:
+          - backend:
+              service:
+                name: prowlarr
+                port:
+                  number: 9696
+            path: /
+            pathType: Prefix
