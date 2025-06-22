@@ -55,6 +55,7 @@ spec:
               paths:
                 - path: /
                   pathType: Prefix
+      addons:
         codeserver:
           enabled: true
           ingress:
