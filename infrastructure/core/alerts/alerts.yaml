@@ -15,7 +15,7 @@ metadata:
   name: discord-webhook
   namespace: flux-system
 stringData:
-    address: ${ALERTS_WEBHOOK}
+    address: ${}
 ---
 apiVersion: notification.toolkit.fluxcd.io/v1beta3
 kind: Alert
@@ -23,9 +23,7 @@ metadata:
   name: discord-alerts
   namespace: flux-system
 spec:
-  summary: "cluster addons"
   eventMetadata:
-    env: "production"
     cluster: "Truek8s"
   providerRef:
     name: discord
@@ -35,3 +33,5 @@ spec:
       name: '*'
     - kind: Kustomization
       name: '*'
+  exclusionList:
+    - ".*Dependencies do not meet ready condition.*"
