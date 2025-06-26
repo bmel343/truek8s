@@ -29,6 +29,8 @@ spec:
     name: discord
   eventSeverity: info
   eventSources:
+    - kind: HelmRelease
+      name: "*"
     - kind: GitRepository
       name: '*'
     - kind: Kustomization
