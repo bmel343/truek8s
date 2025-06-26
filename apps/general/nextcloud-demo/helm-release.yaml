@@ -1,0 +1,152 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+    name: nextcloud-demo
+    namespace: nextcloud-demo
+spec:
+    interval: 5m
+    chart:
+        spec:
+            # renovate: registryUrl=https://charts.truechartsoci.org
+            chart: nextcloud
+            version: 35.0.21
+            sourceRef:
+                kind: HelmRepository
+                name: truecharts
+                namespace: flux-system
+            interval: 5m
+    install:
+        createNamespace: true
+        crds: CreateReplace
+        remediation:
+            retries: 1
+    upgrade:
+        crds: CreateReplace
+        remediation:
+            retries: 1
+    timeout: 30m
+    values:
+      global:
+        stopAll: false
+      credentials:
+        backblaze:
+          type: s3
+          url: "${S3_URL}"
+          bucket: "${S3_BUCKET}-nextcloud-demo"
+          accessKey: "${S3_ACCESS_KEY}"
+          secretKey: "${S3_SECRET_KEY}"
+          encrKey: "${S3_ENCRYPTION_KEY}"
+      ingress:
+        main:
+          enabled: true
+          ingressClassName: internal
+          integrations:
+            traefik:
+              enabled: false
+            certManager:
+              enabled: true
+              certificateIssuer: letsencrypt-domain-0
+          hosts:
+            - host: nextclouddemo.${DOMAIN_0}
+              paths:
+                - path: /
+                  pathType: Prefix
+        cloudflare:
+          enabled: true
+          ingressClassName: cloudflare
+          integrations:
+            traefik:
+              enabled: false
+          hosts:
+          - host: nextclouddemo.${DOMAIN_0}
+            paths:
+            - path: /collabora/
+              pathType: Prefix
+              overrideService:
+                name: collabora
+                port: 9980
+            - path: /
+              pathType: Prefix
+      cnpg:
+        main:
+          cluster:
+            singleNode: true
+          pgVersion: 15
+#          mode: recovery
+          backups:
+            enabled: true
+            revision: "1"
+            credentials: backblaze
+            scheduledBackups:
+              - name: daily-backup
+                schedule: "0 0 0 * * *"
+                backupOwnerReference: self
+                immediate: true
+                suspend: false
+          recovery:
+            method: object_store
+            revision: "1"
+            credentials: backblaze
+      persistence:
+        config:
+          accessModes: 
+            - ReadWriteMany
+          volsync:
+          - name: config
+            type: restic
+            cleanupTempPVC: false
+            cleanupCachePVC: false
+            credentials: backblaze
+            dest:
+              enabled: true
+            src:
+              enabled: true
+              trigger:
+                schedule: 10 1 * * *
+        data:
+          enabled: true
+          type: nfs
+          path: ${NEXTCLOUDDEMO_NFS_PATH}
+          server: ${NEXTCLOUDDEMO_NFS_IP}
+        html:
+          accessModes: 
+            - ReadWriteMany
+          volsync:
+          - name: html
+            type: restic
+            cleanupTempPVC: false
+            cleanupCachePVC: false
+            credentials: backblaze
+            dest:
+              enabled: true
+            src:
+              enabled: true
+              trigger:
+                schedule: 20 1 * * *
+      nextcloud:
+        clamav:
+          enabled: true
+          infected_action: delete
+        collabora:
+          enabled: true
+          password: "${NEXTCLOUDDEMO_PASSWORD}"
+          dictionaries:
+            - en_US
+        credentials:
+          initialAdminPassword: "${NEXTCLOUDDEMO_PASSWORD}"
+          initialAdminUser: "${NEXTCLOUDDEMO_USER}"
+        general:
+          accessIP: ${NGINX_IP}
+          default_phone_region: US
+        previews:
+          providers:
+          - BMP
+          - GIF
+          - JPEG
+          - Krita
+          - MarkDown
+          - MP3
+          - OpenDocument
+          - PNG
+          - TXT
+          - XBitmap
