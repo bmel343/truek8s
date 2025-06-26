@@ -66,6 +66,8 @@ spec:
                   pathType: Prefix
       persistence:
         config:
+          accessModes: 
+            - ReadWriteMany
           volsync:
           - name: config
             type: restic
