@@ -68,3 +68,18 @@ spec:
               enabled: true
               trigger:
                 schedule: 10 0 * * *
+      persistence:
+        config:
+          mountpath: /home/coder
+          volsync:
+          - name: home
+            cleanupTempPVC: false
+            cleanupCachePVC: false
+            type: restic
+            credentials: backblaze
+            dest:
+              enabled: true
+            src:
+              enabled: true
+              trigger:
+                schedule: 10 0 * * *
