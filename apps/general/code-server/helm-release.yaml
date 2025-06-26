@@ -68,7 +68,6 @@ spec:
               enabled: true
               trigger:
                 schedule: 10 0 * * *
-      persistence:
         config:
           mountpath: /home/coder
           volsync:
