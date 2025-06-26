@@ -79,10 +79,10 @@ spec:
             main:
               cluster:
                 singleNode: true
-              mode: recovery
+#              mode: recovery
               backups:
                 enabled: true
-                revision: "4"
+                revision: "5"
                 credentials: backblaze
                 scheduledBackups:
                   - name: daily-backup
@@ -92,7 +92,7 @@ spec:
                     suspend: false
               recovery:
                 method: object_store
-                revision: "2"
+                revision: "4"
                 credentials: backblaze
         vaultwarden:
             admin:
