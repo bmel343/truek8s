@@ -70,6 +70,7 @@ spec:
                 schedule: 10 0 * * *
         home:
           mountpath: /home/coder
+          enabled: true
           volsync:
           - name: home
             cleanupTempPVC: false

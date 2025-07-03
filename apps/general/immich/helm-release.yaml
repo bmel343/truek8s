@@ -55,10 +55,10 @@ spec:
           cluster:
             singleNode: true
           pgVersion: 15
-#          mode: recovery
+          mode: recovery
           backups:
             enabled: true
-            revision: "2"
+            revision: "3"
             credentials: backblaze
             scheduledBackups:
               - name: daily-backup
@@ -68,7 +68,7 @@ spec:
                 suspend: false
           recovery:
             method: object_store
-#            revision: "1"
+            revision: "2"
             credentials: backblaze
       immich:
         enable_ml: true
