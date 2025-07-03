@@ -12,6 +12,7 @@ resources:
   - cloudnative-pg.yaml
   - kubernetes-reflector.yaml
   - volsync.yaml
+  - volumesnapshotclass.yaml
   - cf-tunnel-ingress.yaml
   - media-config.yaml
   - generic-device-plugin.yaml

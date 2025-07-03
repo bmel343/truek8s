@@ -18,5 +18,4 @@ resources:
   - chromium.yaml
   - immich.yaml
   - nextcloud.yaml
-  - nextcloud-demo.yaml
   - it-tools.yaml
