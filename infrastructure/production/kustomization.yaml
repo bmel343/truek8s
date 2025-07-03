@@ -3,6 +3,7 @@ kind: Kustomization
 resources:
   - alerts.yaml
   - longhorn.yaml
+  - longhorn-config.yaml
   - metallb.yaml
   - metallb-config.yaml
   - ingress-nginx.yaml
