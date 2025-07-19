@@ -82,7 +82,7 @@ spec:
               mode: recovery
               backups:
                 enabled: true
-                revision: "7"
+                revision: "8"
                 credentials: backblaze
                 scheduledBackups:
                   - name: daily-backup
