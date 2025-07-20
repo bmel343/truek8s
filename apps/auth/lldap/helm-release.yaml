@@ -82,7 +82,7 @@ spec:
         mode: recovery
         backups:
           enabled: true
-          revision: "14"
+          revision: "15"
           credentials: backlbaze
           scheduledBackups:
             - name: daily-backup
