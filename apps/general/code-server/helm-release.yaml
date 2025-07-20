@@ -73,7 +73,7 @@ spec:
               trigger:
                 schedule: 10 0 * * *
         home:
-          mountpath: /home/coder
+          mountPath: /home/coder
           enabled: true
           volsync:
           - name: home
