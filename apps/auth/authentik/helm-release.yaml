@@ -60,7 +60,7 @@ spec:
         mode: recovery
         backups:
           enabled: true
-          revision: "10"
+          revision: "11"
           credentials: backblaze
           scheduledBackups:
             - name: daily-backup
