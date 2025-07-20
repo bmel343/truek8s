@@ -24,6 +24,8 @@ spec:
         remediation:
             retries: 3
     values:
+      podOptions:
+        hostUsers: true
       credentials:
         backblaze:
           type: s3

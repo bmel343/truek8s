@@ -25,6 +25,8 @@ spec:
         remediation:
             retries: 2
     values:
+        podOptions:
+          hostUsers: true
         global:
             stopAll: false
         credentials:

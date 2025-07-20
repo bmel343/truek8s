@@ -26,6 +26,8 @@ spec:
             retries: 1
     timeout: 60m
     values:
+      podOptions:
+        hostUsers: true
       global:
         stopAll: false
       credentials:
