@@ -9,3 +9,4 @@ resources:
   - jetstack.yaml
   - cloudnative-pg.yaml
   - strrl.yaml
+  - renovate.yaml
