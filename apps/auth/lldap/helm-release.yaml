@@ -5,7 +5,7 @@ metadata:
   name: lldap
   namespace: lldap
 spec:
-  interval: 15m
+  interval: 30m
   chart:
     spec:
       chart: lldap
@@ -15,7 +15,7 @@ spec:
         name: truecharts
         namespace: flux-system
       interval: 15m
-  timeout: 5m
+  timeout: 15m
   maxHistory: 3
   install:
     createNamespace: true
@@ -82,7 +82,7 @@ spec:
         mode: recovery
         backups:
           enabled: true
-          revision: "16"
+          revision: "17"
           credentials: backlbaze
           scheduledBackups:
             - name: daily-backup
@@ -91,7 +91,7 @@ spec:
               immediate: true
               suspend: false
         recovery:
-          revision: "11"
+          revision: "16"
           method: object_store
           credentials: backlbaze
     persistence:
