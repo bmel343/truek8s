@@ -15,6 +15,7 @@ resources:
   - qbittorrent.yaml
   - homepage.yaml
   - code-server.yaml
+  - debian.yaml
   - chromium.yaml
   - immich.yaml
   - nextcloud.yaml
