@@ -67,14 +67,15 @@ spec:
                   CUSTOM_RES_W: "1920"
       persistence:
               persistence:
-                config:
+                shared:
+                  mountPath: /shared
+                  enabled: true
                   volsync:
                   - name: config
                     type: restic
-                    mountPath: /shared
                     cleanupTempPVC: false
                     cleanupCachePVC: false
-                    credentials: backblaze
+                    credentials: backblaze-jellyfin
                     dest:
                       enabled: true
                     src:
@@ -82,6 +83,7 @@ spec:
                       trigger:
                         schedule: 30 0 * * *
                 datadir:
+                  enabled: true
                   volsync:
                   - name: datadir
                     type: restic
