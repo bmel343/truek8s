@@ -82,6 +82,7 @@ spec:
               trigger:
                 schedule: 30 0 * * *
         datadir:
+          mountPath: /datadir
           enabled: true
           volsync:
           - name: datadir
