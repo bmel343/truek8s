@@ -66,33 +66,32 @@ spec:
                   CUSTOM_RES_H: "900"
                   CUSTOM_RES_W: "1920"
       persistence:
-              persistence:
-                shared:
-                  mountPath: /shared
-                  enabled: true
-                  volsync:
-                  - name: config
-                    type: restic
-                    cleanupTempPVC: false
-                    cleanupCachePVC: false
-                    credentials: backblaze-jellyfin
-                    dest:
-                      enabled: true
-                    src:
-                      enabled: false
-                      trigger:
-                        schedule: 30 0 * * *
-                datadir:
-                  enabled: true
-                  volsync:
-                  - name: datadir
-                    type: restic
-                    cleanupTempPVC: false
-                    cleanupCachePVC: false
-                    credentials: backblaze
-                    dest:
-                      enabled: false
-                    src:
-                      enabled: false
-                      trigger:
-                        schedule: 10 0 * * *
+        shared:
+          mountPath: /shared
+          enabled: true
+          volsync:
+          - name: config
+            type: restic
+            cleanupTempPVC: false
+            cleanupCachePVC: false
+            credentials: backblaze-jellyfin
+            dest:
+              enabled: true
+            src:
+              enabled: false
+              trigger:
+                schedule: 30 0 * * *
+        datadir:
+          enabled: true
+          volsync:
+          - name: datadir
+            type: restic
+            cleanupTempPVC: false
+            cleanupCachePVC: false
+            credentials: backblaze
+            dest:
+              enabled: false
+            src:
+              enabled: false
+              trigger:
+                schedule: 10 0 * * *
