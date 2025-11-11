@@ -66,11 +66,11 @@ spec:
                   CUSTOM_RES_H: "900"
                   CUSTOM_RES_W: "1920"
       persistence:
-        shared:
-          mountPath: /shared
+        jellyfin:
+          mountPath: /jellyfin
           enabled: true
           volsync:
-          - name: config
+          - name: jellyfin
             type: restic
             cleanupTempPVC: false
             cleanupCachePVC: false
