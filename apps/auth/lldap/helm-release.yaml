@@ -82,7 +82,7 @@ spec:
         mode: recovery
         backups:
           enabled: true
-          revision: "17"
+          revision: "18"
           credentials: backlbaze
           scheduledBackups:
             - name: daily-backup
@@ -91,7 +91,7 @@ spec:
               immediate: true
               suspend: false
         recovery:
-          revision: "16"
+          revision: "17"
           method: object_store
           credentials: backlbaze
     persistence:
