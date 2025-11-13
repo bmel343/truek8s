@@ -59,7 +59,6 @@ spec:
           mode: recovery
           backups:
             enabled: true
-            revision: "7"
             credentials: backblaze
             scheduledBackups:
               - name: daily-backup
@@ -69,7 +68,6 @@ spec:
                 suspend: false
           recovery:
             method: object_store
-            revision: "3"
             credentials: backblaze
       immich:
         enable_ml: true
