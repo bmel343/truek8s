@@ -95,20 +95,10 @@ spec:
           path: ${IMMICH_NFS_PATH}/thumbs
           server: ${IMMICH_NFS_IP}
         profile:
-          accessModes: 
-            - ReadWriteMany
-          volsync:
-          - name: config
-            type: restic
-            cleanupTempPVC: false
-            cleanupCachePVC: false
-            credentials: backblaze
-            dest:
-              enabled: true
-            src:
-              enabled: true
-              trigger:
-                schedule: 10 1 * * *
+          enabled: true
+          type: nfs
+          path: ${IMMICH_NFS_PATH}/profile
+          server: ${IMMICH_NFS_IP}
         video:
           enabled: true
           type: nfs
