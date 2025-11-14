@@ -55,8 +55,8 @@ spec:
         main:
           cluster:
             singleNode: true
-          pgVersion: 15
-          mode: recovery
+          pgVersion: 16
+#          mode: recovery
           backups:
             enabled: true
             credentials: backblaze
